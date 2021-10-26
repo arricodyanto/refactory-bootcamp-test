@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FizzBuzz</title>
+    <title>FizzBuzz Generator</title>
 </head>
 
 <body>
@@ -18,23 +18,21 @@
 
     </p>
     <script>
-        const angka = prompt("Masukkan angka: "); //Ambil inputan
+        const n = prompt("Masukkan angka: "); //Ambil inputan
 
-        //cek apakah angka
-        if (angka >= 1) {
-            //Percabangan
-            if (angka % 3 == 0) {
-                alert("Fizz !!");
-            } else if (angka % 5 == 0) {
-                alert("Buzz !!");
-            } else if (angka % 15 == 0) {
-                alert("FizzBuzz !!");
-            } else {
-                alert(angka);
+        const fizzBuzz = (n) => {
+            var hasil = []
+            for (var i = 1; i <= n; i++) {
+                var angkaFizzBuzz = i
+                if (i % 3 == 0) angkaFizzBuzz = "Fizz"
+                if (i % 5 == 0) angkaFizzBuzz = "Buzz"
+                if (i % 3 == 0 && i % 5 == 0) angkaFizzBuzz = "FizzBuzz"
+                hasil.push(angkaFizzBuzz)
             }
-        } else {
-            alert("Data yang anda masukkan bukan angka.");
+            return hasil
         }
+        document.write("Array generated! Please, open your console!")
+        console.log(fizzBuzz(n))
     </script>
 </body>
 
