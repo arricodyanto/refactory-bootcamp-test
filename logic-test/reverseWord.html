@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reversed Word</title>
+</head>
+
+<body>
+    <h1>Program Membalik(Reverse) Kata</h1>
+    <p>
+        Did not see the alert window? Please
+        <button onClick="window.location.reload();">Reload</button> this page.
+    </p>
+
+    <script>
+        const words = prompt("Masukkan frasa/kata: ")
+        reverseEachWords = (words) => {
+            let splittedWords = words.split(" ");
+            let result = [];
+            splittedWords.forEach((word) => {
+                let reversedWord = word.toLowerCase().split("").reverse();
+                word = word.split("");
+                for (let i = 0; i < word.length; i++) {
+                    if (word[i] === word[i].toUpperCase())
+                        reversedWord[i] = reversedWord[i].toUpperCase();
+                }
+                result.push(reversedWord.join(""));
+            });
+            return result.join(" ");
+        };
+        console.log(reverseEachWords(words));
+
+        // function reverseInPlace(kata) {
+        //     var splitkata = kata.split(" ")
+        //     var words = []
+        //     words = kata.match(/\S+/g);
+        //     var result = ""
+
+        //     splitkata.forEach((word) => {
+        //         var reverseKata = word.toUpperCase().split("").reverse()
+        //         word = word.split("")
+        //         for (let i = 0; i < word.length; i++) {
+        //             if (word[i] === word[i].toUpperCase())
+        //                 reverseKata[i] = reverseKata.toUpperCase()
+        //         }
+        //         words.push(reverseKata.join(""))
+        //     })
+        //     return words.join(" ")
+        //         // for (var i = 0; i < words.length; i++) {
+        //         //     result += words[i].toLowerCase().split('').reverse().join('') + " ";
+        //         // }
+        //         // return result
+        // }
+        // console.log(reverseInPlace(kata))
+    </script>
+</body>
+
+</html>

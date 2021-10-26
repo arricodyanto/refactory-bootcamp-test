@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome</title>
+</head>
+
+<body>
+    <h1>Program Check Palindrome</h1>
+    <p>
+        Did not see the alert window? Please
+        <button onClick="window.location.reload();">Reload</button> this page.
+    </p>
+
+    <script>
+        // inputan
+        const frasa = prompt('Masukkan frasa/kata/angka: ');
+
+        // reverse inputan
+        function reverse(str) {
+            let rev_str = "";
+            for (let i = str.length - 1; i >= 0; i--) {
+                rev_str += str[i];
+            }
+            return rev_str;
+        }
+
+        //  check palindrome
+        function is_palindrome(str) {
+            reverse_str = reverse(str);
+            if (reverse_str === str) {
+                alert("Frasa/Kata yang dimasukkan adalah palindrome");
+            } else {
+                alert("Frasa/Kata yang dimasukkan bukan palindrome");
+            }
+        }
+        is_palindrome(frasa.toLowerCase());
+    </script>
+</body>
+
+</html>

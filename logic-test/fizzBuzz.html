@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FizzBuzz</title>
+</head>
+
+<body>
+    <h1>Program FizzBuzz</h1>
+
+    <p>kelipatan 3 fizz, kelipatan 5 buzz, kelipatan 3 dan 5 fizzbuzz</p>
+    <p>
+        Did not see the alert window? Please
+        <button onClick="window.location.reload();">Reload</button> this page.
+
+    </p>
+    <script>
+        const angka = prompt("Masukkan angka: "); //Ambil inputan
+
+        //cek apakah angka
+        if (angka >= 1) {
+            //Percabangan
+            if (angka % 3 == 0) {
+                alert("Fizz !!");
+            } else if (angka % 5 == 0) {
+                alert("Buzz !!");
+            } else if (angka % 15 == 0) {
+                alert("FizzBuzz !!");
+            } else {
+                alert(angka);
+            }
+        } else {
+            alert("Data yang anda masukkan bukan angka.");
+        }
+    </script>
+</body>
+
+</html>

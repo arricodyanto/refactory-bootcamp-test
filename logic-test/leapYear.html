@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Filter</title>
+</head>
+
+<body>
+    <h1>Program Menampilkan Tahun Kabisat</h1>
+    <p>
+        Did not see the alert window? Please
+        <button onClick="window.location.reload();">Reload</button> this page.
+    </p>
+
+    <script>
+        const tahunAwal = prompt('Masukkan tahun awal: ')
+        const tahunAkhir = prompt('Masukkan tahun akhir: ')
+
+        document.write("Tahun Kabisat pada range: <br>")
+        for (let year = tahunAwal; year <= tahunAkhir; year++) {
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                document.write(year + ", ")
+            }
+        }
+    </script>
+</body>
+
+</html>
