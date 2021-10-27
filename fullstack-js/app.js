@@ -38,7 +38,12 @@ app.get('/', (req, res) => {
     })
 })
 app.get('/good', isLoggedIn, (req, res) => {
-    res.send(`Hi, ${req.user.email}`)
+    var displayName = req.user.displayName
+
+    res.render('signed', {
+        layout: 'layouts/main-layout',
+        title: 'Logged In'
+    })
 })
 app.get('/failed', (req, res) => {
     res.send('Failed to login!')
