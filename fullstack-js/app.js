@@ -42,7 +42,8 @@ app.get('/good', isLoggedIn, (req, res) => {
 
     res.render('signed', {
         layout: 'layouts/main-layout',
-        title: 'Logged In'
+        title: 'Logged In',
+        displayName
     })
 })
 app.get('/failed', (req, res) => {
