@@ -1,0 +1,31 @@
+<div class="container p-3">
+    <div class="row justify-content-center">
+        <div class="col-4 border border-1">
+            <div class="pt-4 p-2">
+                <h1><i class="bi bi-bug-fill d-grid col-1 mx-auto"></i></h1>
+                <h5 class="text-center mt-4 mb-4">Please add Your Password to Continue</h5>
+                <form method="post" action="/users">
+                    <div class="mb-2">
+                        <input type="text" class="form-control" id="id" name="id" value="<%= idguser %>" readonly required>
+                    </div>
+                    <div class="mb-2">
+                        <label for="nama" class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<%= nameguser %>" readonly>
+                    </div>
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<%= emailguser %>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="pass" name="pass" required>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-success">Sign Up</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

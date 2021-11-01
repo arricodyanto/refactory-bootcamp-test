@@ -2,8 +2,46 @@
     <div class="row">
         <div class="col">
             <h4>Hello,
-                <%- displayName %>. You are logged in</h4>
+                <%- idgname %> . You are logged in</h4>
             <a href="/logout">Log out</a>
+
+            <h5 class="mt-4">Daftar Users</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (users.length < 1) { %>
+                            <tr>
+                                <td>
+                                    Data User masih kosong.
+                                </td>
+                            </tr>
+                            <% } else { %>
+                                <% users.forEach(usr => { %>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>
+                                            <%= usr.id %>
+                                        </td>
+                                        <td>
+                                            <%= usr.nama %>
+                                        </td>
+                                        <td>
+                                            <%= usr.email %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                        <% } %>
+                    </tbody>
+            </div>
+            </table>
         </div>
     </div>
 </div>
