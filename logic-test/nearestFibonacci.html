@@ -9,7 +9,42 @@
 </head>
 
 <body>
+    <p>
+        ***console only***<br>please, open your console
+    </p>
     <script>
+        const diffOfNearestFibonacci = (arr) => {
+            const num = sumArr(arr);
+            const nearestFibo = getNearestFibo(num);
+            let res = Math.abs(num - nearestFibo);
+
+            return res;
+        };
+
+        const sumArr = (arr) => {
+            return arr.reduce((total, num) => {
+                return total + num;
+            }, 0);
+        };
+
+        const getNearestFibo = (num) => {
+            if (num == 0) return num;
+
+            let first = 0,
+                second = 1;
+            let third = first + second;
+
+            while (third <= num) {
+                first = second;
+                second = third;
+                third = first + second;
+            }
+
+            let res = Math.abs(third - num) >= Math.abs(second - num) ? second : third;
+            return res;
+        };
+
+        console.log(diffOfNearestFibonacci([15, 1, 3]));
     </script>
 </body>
 

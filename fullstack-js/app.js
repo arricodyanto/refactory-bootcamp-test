@@ -2,18 +2,11 @@ require('./auth')
 require('./utils/db')
 
 const userModel = require('./utils/users')
-    // require('./conn')
 
-// const { loadUsers, saveUser, addUser, findID } = require('./utils/userMan')
-
-const fs = require('fs')
 const express = require('express')
 const expressLayouts = require('express-ejs-layouts');
-const queryString = require('query-string');
 const passport = require('passport')
 const cookieSession = require('cookie-session');
-const { time } = require('console');
-const { title } = require('process');
 
 const app = express()
 const port = 3000
@@ -22,15 +15,6 @@ app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
-
-// db connection
-// const client = new Client({
-//     host: 'localhost',
-//     port: 5432,
-//     database: 'skilltest',
-//     user: 'postgres',
-//     password: 'password',
-// })
 
 app.use(cookieSession({
     name: 'skilltest-session',
@@ -48,6 +32,8 @@ const isLoggedIn = (req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// Root routes (login)
 app.get('/', (req, res) => {
     res.render('login', {
         layout: 'layouts/main-layout',
@@ -55,10 +41,31 @@ app.get('/', (req, res) => {
     })
 })
 
+// Checking email and pass from form page that matching in db or not
+app.post('/', async(req, res) => {
+    var emailuser = req.body.email
+    var passuser = req.body.pass
+
+    const users = await userModel.findOne({ email: emailuser })
+    if (users) {
+        const cek = JSON.parse(users.pass)
+        if (cek == passuser) {
+            res.send(users)
+        } else {
+            res.send('Password tidak cocok')
+        }
+    }
+    if (!users) {
+        res.send('Akun anda belum terdaftar! Silakan mendaftar melalui akun Google Anda')
+    }
+
+})
+
+// Cheking user (if doesn't exitst = adding to db, if it does = redirect to dashboard)
 app.get('/checkuser', isLoggedIn, async(req, res) => {
     var idguser = req.user.id
 
-    const users = await userModel.findOne({ id: req.user.id })
+    const users = await userModel.findOne({ id: idguser })
     if (users) {
         const cek = JSON.parse(users.id)
         if (cek == idguser) {
@@ -71,14 +78,7 @@ app.get('/checkuser', isLoggedIn, async(req, res) => {
 
 })
 
-app.get('/getusers', (req, res) => {
-
-    userModel.find().then((user) => {
-        res.send(user)
-    })
-
-})
-
+// Dashboard routes
 app.get('/dashboard', isLoggedIn, async(req, res) => {
     var idgname = req.user.displayName
 
@@ -90,70 +90,68 @@ app.get('/dashboard', isLoggedIn, async(req, res) => {
         users,
         idgname
     })
-
 })
 
+// Get all user data 
+app.get('/getusers', (req, res) => {
+    userModel.find().then((user) => {
+        res.send(user)
+    })
+})
 
+// Add user data to db
+app.post('/users', (req, res) => {
+    userModel.insertMany(req.body, (error, result) => {
+        res.redirect('/dashboard')
+    })
+})
 
+// Add password to user account
 app.get('/users/add', isLoggedIn, (req, res) => {
     idguser = req.user.id
     nameguser = req.user.displayName
     emailguser = req.user.emails[0].value
     res.render('adduser', {
-            layout: 'layouts/main-layout',
-            title: 'Complete your profile to continue - alakadarnya',
-            idguser,
-            nameguser,
-            emailguser
-        })
-        // console.log('add')
+        layout: 'layouts/main-layout',
+        title: 'Complete your profile to continue - alakadarnya',
+        idguser,
+        nameguser,
+        emailguser
+    })
 })
 
-app.post('/users', (req, res) => {
-    userModel.insertMany(req.body, (error, result) => {
-            res.redirect('/dashboard')
-        })
-        // userDetails.save().then((userModel) => {
-        //     res.redirect('/dashboard')
-        // })
-        // Menambahkan 1 data
-        // const user1 = new userModel({
-        //     id: '123131',
-        //     nama: 'Arrrico',
-        //     email: 'arricohandyanto@gmail.com',
-        //     pass: '12345'
-        // })
-
-    // user1.save().then((userModel) => console.log(userModel))
-})
-
+// Send data if err
 app.get('/failed', (req, res) => {
     res.send('Failed to login!')
 })
 
+// Google Login Route
 app.get('/auth/google',
     passport.authenticate('google', {
         scope: ['profile', 'email']
     })
 )
 
+
+// Google Callback (if Err)
 app.get('/auth/google/callback',
     passport.authenticate('google', {
         failureRedirect: '/failed'
     }),
 
     function(req, res) {
-        // Successful authentication, redirect home.
         res.redirect('/checkuser')
     }
 );
 
+// Logout Route
 app.get('/logout', (req, res) => {
     req.session = null
     req.logout()
     res.redirect('/')
 })
 
+// Listening to port
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
