@@ -26,10 +26,9 @@ npm start
 - Then, after the local server has started you can open the url which appeared on your terminal to open the app from web, or you can manually open your browser and input this url --\&gt;
 
 ```sh
-[http://localhost:3000](http://localhost:3000/)
+http://localhost:3000/
 ```
 
-  1.
 ## App Flow Explanation
 
 1. On the default routes (&#39;/&#39;), the app will show the login page. There, you can input your email and password if you have already registered. If not, you can registered your account with Google Account below.
@@ -39,9 +38,9 @@ npm start
 5. Or, if you want to check it with postman, you can type
 
 ```sh
-[http://localhost:3000/getusers](http://localhost:3000/getusers)
+http://localhost:3000/getusers
 ```
 
 with &#39;get&#39; method. The program will show the list into a json form.
 
-1. At last, if you want to logout from your account, you can user endpoint &#39;/logout&#39; to automatically end your session in the app.
+6. At last, if you want to logout from your account, you can user endpoint &#39;/logout&#39; to automatically end your session in the app.
